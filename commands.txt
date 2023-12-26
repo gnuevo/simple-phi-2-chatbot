@@ -1,0 +1,15 @@
+# create new venv
+python3 -m virtualen env
+
+
+# add kernel to jupyter notebook
+python3 -m pip install ipykernel
+python3 -m pip install ipykernel
+python3 -m ipykernel install --user --name ipglobal-python --display-name "Python3 Ipglobal"
+
+
+# package installation
+python3 -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+python3 -m pip install transformers
+python3 -m pip install einops
+python3 -m pip install accelerate

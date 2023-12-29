@@ -10,6 +10,7 @@ from transformers import (
 from threading import Thread
 import re
 from typing import List
+from details import DETAILS
 
 LANG = "EN" # either EN and ES are valid codes
 CHAT_NAME_PATTERN = r'\n.+:$' # matches substrings like `\nUser:` at the end
@@ -112,4 +113,4 @@ def predict(message, history):
         yield partial_message
 
 
-gr.ChatInterface(predict).queue().launch()
+gr.ChatInterface(predict,**DETAILS[LANG]).queue().launch()

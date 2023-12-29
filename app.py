@@ -45,7 +45,7 @@ class StopOnTokens(StoppingCriteria):
     """Stops the model if it produces an 'end of text' token"""
     def __call__(self, input_ids: torch.LongTensor, 
                  scores: torch.FloatTensor, **kwargs) -> bool:
-        stop_ids = [50256] # <|endoftext|>
+        stop_ids = [50256, 198] # <|endoftext|> and EOL
         for stop_id in stop_ids:
             if input_ids[0][-1] == stop_id:
                 return True
@@ -82,7 +82,7 @@ def predict(message, history):
         [tokenizer.encode(HUMAN_NAME), tokenizer.encode(BOT_NAME)])
 
     messages = "".join(["".join(
-        [f"\n{HUMAN_NAME}:"+item[0], f"\n{BOT_NAME}:"+item[1]]
+        [f"\n{HUMAN_NAME}: "+item[0], f"\n{BOT_NAME}:"+item[1]]
     ) for item in history_transformer_format]).strip()
     messages = CONTEXT + '\n' + messages
 
